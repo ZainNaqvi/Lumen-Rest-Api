@@ -46,7 +46,7 @@ Route::group([
     Route::delete('post/delete/{id}', 'UserPostController@destroy');
     Route::post('post/edit', 'UserPostController@update');
     Route::post('post/read', 'UserPostController@read');
-    Route::post('post/readOne', 'UserPostController@show');
+    Route::post('post/readOne/{id}', 'UserPostController@show');
 
 });
 

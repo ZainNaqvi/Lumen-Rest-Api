@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\UserPost;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 class UserPostController extends Controller
 {
@@ -11,6 +12,7 @@ class UserPostController extends Controller
     {
         $this->middleware('auth:api', ['except' => ['']]);
     }
+
     public function read()
     {
         // Get All products
@@ -48,8 +50,7 @@ class UserPostController extends Controller
         $post->title = $request->input('title');
         $post->description = $request->input('description');
         $post->tag = $request->input('tag');
-        $post->uid=$request->input("uid");
-
+        $post->uid=$request->input('uid');
         $post->save();
         return response()->json($post);
 
@@ -57,11 +58,12 @@ class UserPostController extends Controller
     }
 
 
-    public function show($id)
+    public function show(Request $request)
     {
         // GET(id)
         // show each product by its ID from database
-        $post = Post::find($id);
+        
+        $post = UserPost::find($id);
         return response()->json($post);
     }
 
