@@ -13,11 +13,15 @@ class UserPostController extends Controller
         $this->middleware('auth:api', ['except' => ['']]);
     }
 
-    public function read()
+    public function read(Request $request)
     {
         // Get All products
         // get All Products From Database
-        $post = UserPost::all();
+          $this->validate($request, [
+            'uid' => 'required',
+            
+        ]);
+        $post = UserPost::where('uid','=',$request->input("uid"))->get();
         return response()->json($post);
 
     }
